@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Kafka dependencies
+KFKSTREAM=org.apache.spark:spark-streaming-kafka-0-10-assembly_2.10:2.2.0
+KFKSQL=org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.0
+
+# Network used by the alert system
+NETWORK=alert_stream_default
+
+# Run jupyter through the Docker
+docker run -it --rm  \
+	-v $PWD:/home/jovyan/work:rw -p 8888:8888 -p 4040:400 \
+	--network=${NETWORK} -P msb \
+	/usr/local/spark/bin/pyspark --packages ${KFKSTREAM},${KFKSQL}
