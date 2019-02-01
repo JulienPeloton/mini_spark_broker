@@ -71,4 +71,4 @@ Follow instructions on screen and start playing with the notebooks!
 ```bash
 docker: Error response from daemon: network alert_stream_default not found.
 ```
-This usually means you did not start the container for the alert stream (see [Part1](bootcamp_1_lsst_alert_stream.ipynb)), or did not set correctly the same network name for the two docker images.
+This usually means you did not start the container for the alert stream (see above), or did not set correctly the same network name for the two docker images.
