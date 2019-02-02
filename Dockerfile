@@ -11,13 +11,14 @@ WORKDIR /home/jovyan
 RUN git clone https://github.com/lsst-dm/sample-avro-alert.git && cd sample-avro-alert && git checkout tickets/DM-8160
 
 # Get alert stream utils
-WORKDIR /home/jovyan
-RUN git clone https://github.com/lsst-dm/alert_stream.git
-ENV PYTHONPATH=$PYTHONPATH:/home/alert_stream/python
+#WORKDIR /home/jovyan
+#RUN git clone https://github.com/lsst-dm/alert_stream.git
+#ENV PYTHONPATH=$PYTHONPATH:/home/jovyan/alert_stream/python
 
 # Add other dependencies
 WORKDIR /home/jovyan/work
-ADD requirements.txt .
+ADD . .
+ENV PYTHONPATH=$PYTHONPATH:/home/jovyan/work/python
 RUN pip install -r requirements.txt
 
 ENV PYSPARK_DRIVER_PYTHON=jupyter-notebook
