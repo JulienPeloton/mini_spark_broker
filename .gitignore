@@ -2,3 +2,5 @@ __pycache__
 derby.log
 metastore_db
 .ipynb_checkpoints
+data/
+.DS_Store
