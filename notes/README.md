@@ -112,7 +112,7 @@ Ultimately, we want a Broker to be able to _filter, aggregate, enrich, consume_ 
 9. managing annotation & citation as followup observations are made
 10. collecting classification and other information gathered by the scientific community
 
-Hereafter, we will focus on 2 and 3. Other functions will be discussed and implemented later (but definitely doable!).
+Hereafter in this bootcamp, we will focus on 2 and 3. Other functions will be discussed and implemented later (but definitely doable!).
 
 ### Motivation: simplicity, scalability & flexibility
 
@@ -122,17 +122,13 @@ What is driving the design of the broker?
 * The broker's behaviour should be the same regardless the amount of incoming data. This implies the technology used for this is scalable.
 * The broker structure should allow for easy extension. As data will come, new features will be added, and the broker should be able to incorporate those smoothly. In addition, the broker should be able to connect to a large numbers of external tools and frameworks to maximize its scientific production without redeveloping tools.
 
-The solution we propose here is **Apache Spark**, and more specifically its streaming module. The language chosen for the API is Python, which is widely used in the astronomy community, has a large scientific ecosystem and easily connects with LSST DESC existing tools.
+The solution we propose here is [Apache Spark](http://spark.apache.org/), and more specifically its [streaming module](http://spark.apache.org/streaming/). The language chosen for the API is Python, which is widely used in the astronomy community, has a large scientific ecosystem and easily connects with LSST DESC existing tools.
 
 ### Spark Streaming & Kafka: basics
 
 Note: _The Kafka project introduced a new consumer API between versions 0.8 and 0.10, so there are 2 separate corresponding Spark Streaming packages available. See [here](https://spark.apache.org/docs/2.3.1/streaming-kafka-integration.html) for more information._
 
 For a broker it isn't enough to just read, write, and store streams of data. In our case the purpose is to enable real-time processing of streams as described above. It would be possible to use directly a Kafka cluster for the broker as well to do simple processing (aggregation, join), but eventually we want to be able to do something more sophisticated, like running more traditional analyses (i.e. non-trivial processing) on the alert data in real-time.
-
-<!--#### Old API: DStreams
-
-[Spark Streaming](https://spark.apache.org/docs/latest/streaming-programming-guide.html): processing data streams using DStreams (old API).-->
 
 #### Streaming + DataFrames (new API)
 
@@ -142,11 +138,13 @@ For a broker it isn't enough to just read, write, and store streams of data. In 
 
 We set up a small bootcamp to put hands on the broker! Materials can be found [here](https://github.com/JulienPeloton/mini_spark_broker).
 
+### Going beyond: Machine learning
+
 ### Going beyond: connecting to external databases
 
 #### Retrieving Template and Calibration Images, Science Images, DIASources, DIAObject, and DRP Objects
 
-LSST Science Platform --> provides access to proprietary data products.
+LSST Science Platform provides access to proprietary data products.
 a number of measurements (e.g. forced photometry, survey precovery for a limited number of objects, processed visit images) will be stored at the alert moment in the Prompt Product Database and will be available within 24 hours. This service will be accessible through the LSST Science Platform.
 
 https://dmtn-092.lsst.io/
