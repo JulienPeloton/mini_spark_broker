@@ -1,10 +1,21 @@
-from __future__ import print_function
+# Copyright 2018 Julien Peloton
+# Author: Maria Patterson, Julien Peloton
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 import confluent_kafka
 from . import avroUtils
-import json
 
 __all__ = ['AlertProducer']
-
 
 class AlertProducer(object):
     """Alert stream producer with Kafka.
@@ -13,30 +24,42 @@ class AlertProducer(object):
     ----------
     topic : `str`
         The name of the topic stream for writing.
-    schema : Avro schema
-        The writer Avro schema for encoding data. Optional.
+    schema_files : List of str, optional
+        List with paths to avro schemas for encoding data.
+        Shemas will be combined in one. Default is None.
     **kwargs
         Keyword arguments for configuring confluent_kafka.Producer().
     """
-
     def __init__(self, topic, schema_files=None, **kwargs):
         self.producer = confluent_kafka.Producer(**kwargs)
         self.topic = topic
         if schema_files is not None:
             self.alert_schema = avroUtils.combineSchemas(schema_files)
 
-    def send(self, data, encode=False):
+    def send(self, data, alert_schema=None, encode=False):
         """Sends a message to Kafka stream.
+
+        You can choose to encode or not the message (using avro).
+        If you choose to encode the message, you need to specify the schema.
+        The schema can be specified when you instantiate the `AlertProducer`
+        class (using `schema_files`), or when you send the
+        message (`alert_schema`).
 
         Parameters
         ----------
         data : message content
-            Data containing message content.  If encode is True, expects JSON.
-        encode : `boolean`
+            Data containing message content. If encode is True, expects JSON.
+        alert_schema: dict, optional
+            Avro schema for encoding data. Default is None.
+        encode : `boolean`, optional
             If True, encodes data to Avro format. If False, sends data raw.
+            Default is False.
         """
         if encode is True:
-            avro_bytes = avroUtils.writeAvroData(data, self.alert_schema)
+            if alert_schema is None:
+                avro_bytes = avroUtils.writeAvroData(data, self.alert_schema)
+            else:
+                avro_bytes = avroUtils.writeAvroData(data, alert_schema)
             raw_bytes = avro_bytes.getvalue()
             self.producer.produce(self.topic, raw_bytes)
         else:
@@ -44,4 +67,6 @@ class AlertProducer(object):
             self.producer.produce(self.topic, data_str)
 
     def flush(self):
+        """ Publish message to the Kafka cluster.
+        """
         return self.producer.flush()
