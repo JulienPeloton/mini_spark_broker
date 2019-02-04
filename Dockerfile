@@ -2,23 +2,12 @@ FROM jupyter/pyspark-notebook
 LABEL maintainer "peloton@lal.in2p3.fr"
 ENV REFRESHED_AT 2019-02-01
 
-# Basic tools
-#RUN apt-get update && \
-# apt-get install vim
-
-# Get alert schemas. # TODO update to checkout master when schema is updated
-WORKDIR /home/jovyan
-RUN git clone https://github.com/lsst-dm/sample-avro-alert.git && cd sample-avro-alert && git checkout tickets/DM-8160
-
-# Get alert stream utils
-#WORKDIR /home/jovyan
-#RUN git clone https://github.com/lsst-dm/alert_stream.git
-#ENV PYTHONPATH=$PYTHONPATH:/home/jovyan/alert_stream/python
-
-# Add other dependencies
+# Add repo
 WORKDIR /home/jovyan/work
 ADD . .
 ENV PYTHONPATH=$PYTHONPATH:/home/jovyan/work/python
+
+# Add dependencies
 RUN pip install -r requirements.txt
 
 ENV PYSPARK_DRIVER_PYTHON=jupyter-notebook
