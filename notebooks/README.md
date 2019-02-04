@@ -7,6 +7,29 @@ Welcome to the Mini Spark broker bootcamp!
 * [Part3](bootcamp_3_filtering.ipynb): manipulate the streams using simple filters.
 * [Part4](bootcamp_4_crossmatching.ipynb): Crossmatch objects of the stream with other catalog objects.
 
+## How to play the notebooks?
+
+Long story short:
+
+```bash
+cd ${mini-spark-broker}
+
+# Download a subset of ZTF data
+./download_data.sh
+
+# Setup the containers
+./setup_docker.sh
+
+# Launch stream of alerts
+./launch_alert_system.sh
+
+# Launch the bootcamp (i.e. the notebook)
+# and execute the notebooks!
+./launch_bootcamp.sh
+```
+
+For more explanation, see below.
+
 ## Set up the environment
 
 ### Alert data set
@@ -34,7 +57,32 @@ docker run -it --rm \
     msb python bin/sendAlertStream.py kafka:9092 my-stream
 ```
 
-At this stage the stream is created, and 499 alerts will be sent at ~10 seconds interval. No worry if it finishes before you started working, you will be able to consume them on a later time (and you can always relaunch the stream).
+At this stage the stream is created, and 499 alerts will be sent at 1 second interval between 2 alerts. No worry if it finishes before you started working, you will be able to consume them on a later time (and you can always relaunch the stream). If you see the stream processing in your console:
+
+```bash
+$ docker run -it --rm \
+    --network=mini_spark_broker_default \
+    -v $PWD/data:/home/jovyan/work/data:ro \
+    msb python bin/sendAlertStream.py kafka:9092 my-stream
+visit: 00150 	time: 1549289943.0019574
+visits finished: 1 	 time: 1549289944.9786158
+visit: 01150 	time: 1549289945.0016901
+visits finished: 2 	 time: 1549289945.0222661
+visit: 01150 	time: 1549289946.0018787
+visits finished: 3 	 time: 1549289946.0292997
+visit: 02150 	time: 1549289947.0036483
+visits finished: 4 	 time: 1549289947.02289
+visit: 02150 	time: 1549289948.0015655
+visits finished: 5 	 time: 1549289948.0156095
+visit: 02150 	time: 1549289949.0037196
+visits finished: 6 	 time: 1549289949.017008
+visit: 02150 	time: 1549289950.0042317
+visits finished: 7 	 time: 1549289950.035189
+visit: 04150 	time: 1549289951.002203
+...
+```
+
+that means you can now start this bootcamp!
 
 ## Launching the mini Spark broker
 
