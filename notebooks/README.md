@@ -9,16 +9,23 @@ Welcome to the Mini Spark broker bootcamp!
 
 ## Set up the environment
 
-see download_data.sh + setup_docker.sh
+### Alert data set
+
+We propose to play with a subset of the publicly available ZTF alerts ([website](https://ztf.uw.edu/alerts/public/)). There is a script at the root of this repo to download the data (see [download_data.sh](../download_data.sh)).
+
+### Docker
+
+To ease the use of the different components for the Alert System and the mini-broker, the bootcamp is played inside Docker containers (heavily inspired from the [lsst-dm/alert_stream](https://github.com/lsst-dm/alert_stream) repository!). Execute the [setup_docker.sh](../setup_docker.sh) script to initialise the Kafka server and the image containing the bootcamp.
 
 ## Launching the alert stream
 
-In order to play with the bootcamp, you need first to create the stream of alerts. This is handled by the [lsst-dm/alert_stream](https://github.com/lsst-dm/alert_stream) repository, maintained by the LSST DM group. Here are the steps you need:
+In order to play with the bootcamp, you need first to create the stream of alerts. This is inspired by the [lsst-dm/alert_stream](https://github.com/lsst-dm/alert_stream) repository, maintained by the LSST DM group. Here are the steps you need:
 
 ```bash
 ###################################
 # LSST Alert System
 ###################################
+# See ../launch_alert_system.sh
 
 # Send bursts of alerts at expected visit intervals to topic "my-stream":
 docker run -it --rm \
@@ -27,7 +34,7 @@ docker run -it --rm \
     msb python bin/sendAlertStream.py kafka:9092 my-stream
 ```
 
-At this stage the stream is created, and XX alerts will be sent at ~30 seconds interval. No worry if it finishes before you started working, you will be able to consume them on a later time (and you can always relaunch the stream).
+At this stage the stream is created, and 499 alerts will be sent at ~10 seconds interval. No worry if it finishes before you started working, you will be able to consume them on a later time (and you can always relaunch the stream).
 
 ## Launching the mini Spark broker
 
