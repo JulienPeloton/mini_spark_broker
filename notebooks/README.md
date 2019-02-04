@@ -11,7 +11,7 @@ Welcome to the Mini Spark broker bootcamp!
 
 ### Alert data set
 
-We propose to play with a subset of the publicly available ZTF alerts ([website](https://ztf.uw.edu/alerts/public/)). There is a script at the root of this repo to download the data (see [download_data.sh](../download_data.sh)).
+We propose to play with a subset of the publicly available ZTF alerts ([website](https://ztf.uw.edu/alerts/public/)). There is a script at the root of this repo to download the data (see [download_data.sh](../download_data.sh)). For more information about the ZTF alert data, see [here](https://zwickytransientfacility.github.io/ztf-avro-alert/).
 
 ### Docker
 
@@ -61,10 +61,3 @@ docker run -it --rm  \
 ```
 
 Follow instructions on screen and start playing with the notebooks!
-
-## Troubleshooting
-
-```bash
-docker: Error response from daemon: network mini_spark_broker_default not found.
-```
-This usually means you did not set correctly the same network name for the two docker images.

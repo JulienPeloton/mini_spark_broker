@@ -17,7 +17,7 @@ _Typical flow of alerts in astronomy. Raw data are collected by the telescope ev
  
 **Resources**
 
-* [Notes](notes/) concerning the LSST alert system, the DESC broker, and Apache Spark. It also contains slides summarizing this study.
+* [Notes](notes/) concerning the LSST alert system, the DESC broker, and Apache Spark. It also contains slides summarizing this study, and a FAQ.
 * [Bootcamp](notebooks/) to play with a mini-broker using the Apache Spark Streaming module.
 * [Scripts](bin/) containing LSST alert system simulator and the mini-broker launcher scripts.
 * [Library](python/) containing various functions and classes for the alert simulator and the mini-broker.
