@@ -7,4 +7,4 @@
 docker run -it --rm \
     --network=mini_spark_broker_default \
     -v $PWD/data:/home/jovyan/work/data:ro \
-    msb python bin/sendAlertStream.py kafka:9092 my-stream
+    msb python bin/sendAlertStream.py kafka:9092 ztf-stream

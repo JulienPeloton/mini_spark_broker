@@ -9,7 +9,7 @@ KFKSTREAM=org.apache.spark:spark-streaming-kafka-0-10-assembly_2.10:2.2.0
 KFKSQL=org.apache.spark:spark-sql-kafka-0-10_2.11:2.4.0
 
 # Network used by the alert system
-NETWORK=alert_stream_default
+NETWORK=mini_spark_broker_default
 
 # Run jupyter through the Docker
 docker run -it --rm  \
