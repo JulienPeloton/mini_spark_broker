@@ -2,10 +2,16 @@
 
 Welcome to the Mini Spark broker bootcamp!
 
+Using ZTF alerts:
+
 * [Part1](bootcamp_1_lsst_alert_stream.ipynb): basics on the LSST alert system, and alerts.
-* [Part2](bootcamp_2_simple_connection.ipynb): connect the mini-broker to the stream with Apache Spark, and read alerts.
-* [Part3](bootcamp_3_filtering.ipynb): manipulate the streams using simple filters.
-* [Part4](bootcamp_4_crossmatching.ipynb): Crossmatch objects of the stream with other catalog objects.
+* [Part2](bootcamp_2_simple_connection.ipynb): connect the mini-broker to the ZTF stream with Apache Spark, and read alerts.
+* [Part3](bootcamp_3_filtering.ipynb): manipulate the ZTF streams using simple filters.
+* [Part4](bootcamp_4_crossmatching.ipynb): Crossmatch objects of the ZTF stream with other catalog objects.
+
+Using LSST alerts:
+
+* [Part5](bootcamp_5_LSST_alert.ipynb): connect the mini-broker to the LSST stream with Apache Spark, and read alerts.
 
 ## How to play the notebooks?
 
