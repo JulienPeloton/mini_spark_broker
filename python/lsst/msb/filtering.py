@@ -67,7 +67,8 @@ def ret(d, key):
     1
     """
     if ":" in key:
-        level = key.split(":")
+        # Split at first ":"
+        level = key.split(":", maxsplit=1)
         if isinstance(d[level[0]], dict):
             return ret(d[level[0]], level[1])
         else:
@@ -77,7 +78,7 @@ def ret(d, key):
             """.format(level[0]))
     return d[key]
 
-def make_dataframe_from_ztf(rdd, colnames):
+def make_dataframe_from_alerts(rdd, colnames):
     """ Make a Dataframe from a RDD of alerts and columns names.
 
     Parameters
