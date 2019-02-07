@@ -40,7 +40,7 @@ For more explanation, see below.
 
 ### Alert data set
 
-We propose to play with a subset of the publicly available ZTF alerts ([website](https://ztf.uw.edu/alerts/public/)). There is a script at the root of this repo to download the data (see [download_data.sh](../download_data.sh)). For more information about the ZTF alert data, see [here](https://zwickytransientfacility.github.io/ztf-avro-alert/).
+We propose to play with a subset of the publicly available ZTF alerts ([website](https://ztf.uw.edu/alerts/public/)). There is a script at the root of this repo to download the data (see [download_ztf_alert_data.sh](../download_ztf_alert_data.sh)). For more information about the ZTF alert data, see [here](https://zwickytransientfacility.github.io/ztf-avro-alert/).
 
 ### Docker
 
