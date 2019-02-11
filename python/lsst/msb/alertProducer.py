@@ -30,13 +30,13 @@ class AlertProducer(object):
     **kwargs
         Keyword arguments for configuring confluent_kafka.Producer().
     """
-    def __init__(self, topic, schema_files=None, **kwargs):
+    def __init__(self, topic: str, schema_files: list=None, **kwargs):
         self.producer = confluent_kafka.Producer(**kwargs)
         self.topic = topic
         if schema_files is not None:
             self.alert_schema = avroUtils.combineSchemas(schema_files)
 
-    def send(self, data, alert_schema=None, encode=False):
+    def send(self, data: dict, alert_schema: dict=None, encode: bool=False):
         """Sends a message to Kafka stream.
 
         You can choose to encode or not the message (using avro).
@@ -47,7 +47,7 @@ class AlertProducer(object):
 
         Parameters
         ----------
-        data : message content
+        data : dict
             Data containing message content. If encode is True, expects JSON.
         alert_schema: dict, optional
             Avro schema for encoding data. Default is None.

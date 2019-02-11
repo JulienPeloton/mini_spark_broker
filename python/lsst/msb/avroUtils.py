@@ -24,7 +24,7 @@ __all__ = [
     'readSchemaData',
     'readSchemaFromAvroFile']
 
-def writeAvroData(json_data, json_schema):
+def writeAvroData(json_data: dict, json_schema: dict) -> io._io.BytesIO:
     """Encode json into Avro format given a schema.
 
     Parameters
@@ -43,7 +43,7 @@ def writeAvroData(json_data, json_schema):
     fastavro.schemaless_writer(bytes_io, json_schema, json_data)
     return bytes_io
 
-def readAvroData(bytes_io, json_schema):
+def readAvroData(bytes_io: io._io.BytesIO, json_schema: dict) -> dict:
     """Read data and decode with a given Avro schema.
 
     Parameters
@@ -62,7 +62,7 @@ def readAvroData(bytes_io, json_schema):
     message = fastavro.schemaless_reader(bytes_io, json_schema)
     return message
 
-def readSchemaData(bytes_io):
+def readSchemaData(bytes_io: io._io.BytesIO):
     """Read data that already has an Avro schema.
 
     Parameters
@@ -79,7 +79,7 @@ def readSchemaData(bytes_io):
     message = fastavro.reader(bytes_io)
     return message
 
-def readSchemaFromAvroFile(fn):
+def readSchemaFromAvroFile(fn: str) -> dict:
     """ Reach schema from a binary avro file.
 
     Parameters
@@ -97,7 +97,7 @@ def readSchemaFromAvroFile(fn):
         schema = data.schema
     return schema
 
-def decoder(msg, alert_schema):
+def decoder(msg: io._io.BytesIO, alert_schema: dict) -> dict:
     """ Decode an alert from Kafka (avro format)
 
     Parameters
