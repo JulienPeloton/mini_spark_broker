@@ -12,8 +12,12 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+from typing import Any
 
-def extract_history_ztf(alert, key):
+from pyspark import RDD
+from pyspark.sql import DataFrame
+
+def extract_history_ztf(alert: dict, key: str) -> list:
     """Extract data field from alert candidate and previous linked alerts.
 
     Parameters
@@ -36,7 +40,7 @@ def extract_history_ztf(alert, key):
 
     return data
 
-def ret(d, key):
+def ret(d: dict, key: str) -> Any:
     """ Unwrap nested dictionaries in a recursive way.
 
     Parameters
@@ -78,7 +82,7 @@ def ret(d, key):
             """.format(level[0]))
     return d[key]
 
-def make_dataframe_from_alerts(rdd, colnames):
+def make_dataframe_from_alerts(rdd: RDD, colnames: list) -> DataFrame:
     """ Make a Dataframe from a RDD of alerts and columns names.
 
     Parameters
@@ -88,5 +92,10 @@ def make_dataframe_from_alerts(rdd, colnames):
     colnames: list of str
         List containing the keys to include. For nested levels, just chain
         it using double dot: firstdic:seconddic:key
+
+    Returns
+    ----------
+    out: DataFrame
+        Dataframe from the input RDD and columns names.
     """
     return rdd.map(lambda x: tuple(ret(x, k) for k in colnames)).toDF(colnames)
