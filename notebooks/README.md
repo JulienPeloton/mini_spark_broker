@@ -1,6 +1,6 @@
 # Mini Spark Broker Bootcamp
 
-Welcome to the Mini Spark broker bootcamp! We divided the work into 5 parts:
+Welcome to the Apache Spark mini-broker bootcamp! We divided the work into 5 parts:
 
 Using ZTF alerts:
 
@@ -90,7 +90,7 @@ visit: 04150 	time: 1549289951.002203
 
 that means you can now start this bootcamp!
 
-## Launching the mini Spark broker
+## Launching the Apache Spark mini-broker
 
 Once the alert stream container is running, open a new terminal window and start the mini broker container:
 

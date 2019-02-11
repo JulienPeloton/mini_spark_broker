@@ -134,7 +134,7 @@ For a broker it isn't enough to just read, write, and store streams of data. In 
 
 [structured-streaming](https://spark.apache.org/docs/latest/structured-streaming-programming-guide.html): processing structured data streams with relation queries (using Datasets and DataFrames, newer API than DStreams). So in a sense Spark Streaming+SQL modules. (for kafka-related stuff: [structured-streaming-kafka](https://spark.apache.org/docs/latest/structured-streaming-kafka-integration.html))
 
-### Proof-of-concept: connecting LSST alert stream with Spark
+### Proof-of-concept: connecting to LSST alert stream with Spark
 
 We set up a small bootcamp to put hands on the broker! Materials can be found [here](https://github.com/JulienPeloton/mini_spark_broker).
 
@@ -155,7 +155,7 @@ https://dmtn-092.lsst.io/
 
 That's your job!
 
-#### References
+## References
 
 Reference documents mentionning the LSST alert system:
 
