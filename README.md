@@ -1,6 +1,6 @@
-# Mini Spark Broker
+# Apache Spark mini-broker
 
-Welcome to the Mini Spark broker!
+Welcome to the Apache Spark mini-broker!
 
 **Goals for this study:**
 
