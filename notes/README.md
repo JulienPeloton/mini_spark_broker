@@ -130,30 +130,37 @@ Note: _The Kafka project introduced a new consumer API between versions 0.8 and 
 
 For a broker it isn't enough to just read, write, and store streams of data. In our case the purpose is to enable real-time processing of streams as described above. It would be possible to use directly a Kafka cluster for the broker as well to do simple processing (aggregation, join), but eventually we want to be able to do something more sophisticated, like running more traditional analyses (i.e. non-trivial processing) on the alert data in real-time.
 
-#### Streaming + DataFrames (new API)
+Spark [structured-streaming](https://spark.apache.org/docs/latest/structured-streaming-programming-guide.html) allows the processing of structured data streams with relation queries (using Datasets and DataFrames, newer API than DStreams). It is the perfect mix of Spark Streaming and Spark SQL modules. (for kafka-specific: [structured-streaming-kafka](https://spark.apache.org/docs/latest/structured-streaming-kafka-integration.html)). 
 
-[structured-streaming](https://spark.apache.org/docs/latest/structured-streaming-programming-guide.html): processing structured data streams with relation queries (using Datasets and DataFrames, newer API than DStreams). So in a sense Spark Streaming+SQL modules. (for kafka-related stuff: [structured-streaming-kafka](https://spark.apache.org/docs/latest/structured-streaming-kafka-integration.html))
+### Proof-of-concept: connecting to LSST alert stream with Apache Spark
 
-### Proof-of-concept: connecting to LSST alert stream with Spark
+We set up a small bootcamp to get familiar with the Apache Spark Streaming module, and start designing DESC Broker Components and API that will connect to the LSST alert system stream. Materials can be found [here](https://github.com/JulienPeloton/mini_spark_broker) (fully containerised!).
 
-We set up a small bootcamp to put hands on the broker! Materials can be found [here](https://github.com/JulienPeloton/mini_spark_broker).
+### Going beyond: Using Machine learning
 
-### Going beyond: Machine learning
+TBD
 
 ### Going beyond: connecting to external databases
+
+One key point of the Broker is to be able to cross-correlate the alert stream with different other channels. The sources of information are various:
+
+* Raw data set from which the alert has been issued
+* Online databases
+* Other brokers
+* On-disk catalogs.
+
+In the bootcamp, there is an example using online databases (Xmatch service at CDS).
 
 #### Retrieving Template and Calibration Images, Science Images, DIASources, DIAObject, and DRP Objects
 
 LSST Science Platform provides access to proprietary data products.
-a number of measurements (e.g. forced photometry, survey precovery for a limited number of objects, processed visit images) will be stored at the alert moment in the Prompt Product Database and will be available within 24 hours. This service will be accessible through the LSST Science Platform.
-
-https://dmtn-092.lsst.io/
+a number of measurements (e.g. forced photometry, survey precovery for a limited number of objects, processed visit images) will be stored at the alert moment in the Prompt Product Database and will be available within 24 hours. This service will be accessible through the LSST Science Platform for members with appropriate rights (see [DMTN-092](https://dmtn-092.lsst.io/)).
 
 ### Front-end: AstroLabNet
 
-### Which science?
+### Which science should be put in?
 
-That's your job!
+TBD
 
 ## References
 
