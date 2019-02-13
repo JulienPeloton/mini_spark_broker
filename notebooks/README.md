@@ -13,6 +13,10 @@ Using LSST alerts (need external setup, see below):
 
 * [Part5](bootcamp_5_LSST_alert.ipynb): connect the mini-broker to the stream with Apache Spark, and read LSST alerts.
 
+## Before starting!
+
+You need to have `docker` and `docker-compose` installed on your computer. Make sure you are using a recent version of docker-compose (Linux users, see [here](https://github.com/JulienPeloton/mini_spark_broker/issues/13)). The size of the bootcamp image is rather big (6 GB), so make sure you have enough space, and a good internet connection for pulling it quickly.
+
 ## How to play the notebooks?
 
 Long story short:
@@ -44,7 +48,16 @@ We propose to play with a subset of the publicly available ZTF alerts ([website]
 
 ### Docker
 
-To ease the use of the different components for the Alert System and the mini-broker, the bootcamp is played inside Docker containers (heavily inspired from the [lsst-dm/alert_stream](https://github.com/lsst-dm/alert_stream) repository!). Execute the [setup_docker.sh](../setup_docker.sh) script to initialise the Kafka server and the image containing the bootcamp.
+To ease the use of the different components for the Alert System and the mini-broker, the bootcamp is played inside Docker containers (heavily inspired from the [lsst-dm/alert_stream](https://github.com/lsst-dm/alert_stream) repository!). Execute the [setup_docker.sh](../setup_docker.sh) script to initialise the Kafka server and the image containing the bootcamp. Make sure the script executes correctly by checking the 3 images (Kafka, Zookeeper, msb) are there:
+
+```bash
+docker images
+REPOSITORY                 TAG       IMAGE ID          CREATED           SIZE
+msb                        latest    4663a745a8da      17 hours ago      5.95GB
+confluentinc/cp-kafka      latest    f6113794337a      6 days ago        568MB
+confluentinc/cp-zookeeper  latest    20210647ee52      6 days ago        568MB
+...
+```
 
 ## Launching the ZTF alert stream (Part 1-4)
 
