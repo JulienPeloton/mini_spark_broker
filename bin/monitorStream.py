@@ -88,9 +88,6 @@ def main():
     matplotlib.rcParams.update({'font.size': 17})
     fig, ax = plt.subplots(figsize=(15,5))
     while True:
-        # print(countQuery.recentProgress, count)
-        # time.sleep(5)
-        #
         try:
             monitoring.show_stream_process(ax, countQuery, colnames)
             plt.pause(5)
@@ -103,17 +100,6 @@ def main():
             plt.clf()
             time.sleep(5)
         count += 5
-    # loop = asyncio.get_event_loop()
-    # asyncio.ensure_future(
-    #     alertProducer.schedule_delays(
-    #         loop,
-    #         monitoring.show_stream_process,
-    #         [countQuery, colnames],
-    #         interval=args.tinterval
-    #         )
-    #     )
-    # loop.run_forever()
-    # loop.close()
 
 
 if __name__ == "__main__":
