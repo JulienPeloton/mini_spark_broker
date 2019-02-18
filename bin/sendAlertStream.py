@@ -19,7 +19,7 @@ import argparse
 import glob
 import time
 import asyncio
-from lsst.msb import alertProducer, avroUtils
+from desc.msb import alertProducer, avroUtils
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)

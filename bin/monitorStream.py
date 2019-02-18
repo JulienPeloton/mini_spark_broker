@@ -26,8 +26,8 @@ import sys
 import matplotlib
 import matplotlib.pyplot as plt
 
-from lsst.msb import alertProducer, avroUtils
-from lsst.msb import monitoring
+from desc.msb import alertProducer, avroUtils
+from desc.msb import monitoring
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
