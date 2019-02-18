@@ -52,6 +52,8 @@ def recentrecentProgress(query: StreamingQuery, colnames: list, waitfor: int=0):
     dicval = {i: [] for i in colnames}
     timestamp = []
     for c in query.recentProgress:
+        if len(c) == 0:
+            continue
         try:
             for colname in colnames:
                 dicval[colname].append(c[colname])
