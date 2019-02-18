@@ -2,5 +2,5 @@ confluent-kafka>=0.11.4
 avro-python3
 Cython
 fastavro
-aplpy
+aplpy==1.1.1
 astropy
