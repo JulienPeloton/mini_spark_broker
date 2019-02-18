@@ -123,7 +123,7 @@ NETWORK=mini_spark_broker_default
 
 # Run jupyter through the Docker
 docker run -it --rm  \
-	-v $PWD:/home/jovyan/work:rw -p 8888:8888 -p 4040:400 \
+	-v $PWD:/home/jovyan/work:rw -p 8888:8888 -p 400:4040 \
 	--network=${NETWORK} -P msb \
 	/usr/local/spark/bin/pyspark --packages ${KFKSTREAM},${KFKSQL}
 ```
