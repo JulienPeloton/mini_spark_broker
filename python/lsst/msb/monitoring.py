@@ -14,6 +14,8 @@
 # limitations under the License.
 from pyspark.sql.streaming import StreamingQuery
 
+import matplotlib
+import matplotlib.pyplot as plt
 import pandas as pd
 
 import time
@@ -50,6 +52,8 @@ def recentrecentProgress(query: StreamingQuery, colnames: list, waitfor: int=0):
     dicval = {i: [] for i in colnames}
     timestamp = []
     for c in query.recentProgress:
+        if len(c) == 0:
+            continue
         try:
             for colname in colnames:
                 dicval[colname].append(c[colname])
@@ -68,3 +72,17 @@ def recentrecentProgress(query: StreamingQuery, colnames: list, waitfor: int=0):
     data.index = pd.to_datetime(data.index)
 
     return data
+
+def show_stream_process(ax, query, colnames):
+    """
+    Will return data only if the stream is live!
+    """
+    dfp = recentrecentProgress(query, colnames)
+    if dfp.empty:
+        return True
+    plt.cla()
+    dfp.plot(ax=ax)
+    ax.set_ylabel("Rows Per Second")
+    plt.grid()
+    # plt.show(block=False)
+    plt.draw()
