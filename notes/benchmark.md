@@ -129,11 +129,13 @@ ssh kafka-slave1
 echo "2" > /data/zookeeper/myid
 ```
 
+In addition, copy the ZooKeeper configuration file on all the machines (the best is just to `scp` it to all machines in their kafka folder).
+
 ### Step 4: configuring Kafka
 
 **The following has to be done only on all the machines**:
 
-[Download](https://kafka.apache.org/quickstart) Kafka and untar it in `$HOME/libs`:
+[Download](https://kafka.apache.org/quickstart) Kafka and untar it in `$HOME/libs` (if not done previously for ZooKeeper):
 
 ```bash
 cd $HOME/libs
@@ -186,7 +188,7 @@ zookeeper.connect=kafka-master:24498,kafka-slave1:24498,kafka-slave2:24498,kafka
 
 ### Step 5: Finalizing configuration
 
-Finally, for convenience, download Zookeeper and untar it in `$HOME/libs`:
+Finally, for convenience, you can download Zookeeper and untar it in `$HOME/libs`:
 
 ```bash
 cd $HOME/libs
@@ -197,13 +199,13 @@ tar -xvf zookeeper-3.4.10.tar.gz
 cp kafka_2.11-2.1.0/conf/zookeeper.properties zookeeper-3.4.10/conf/zoo.cfg
 ```
 
-We will need the script to launch the servers (you can do it otherwise ny copying Kafka folder to all machines and launching zookeeper on all machines but that's real pain).
-
+There is a convenient script to launch and monitor the status of the servers. **NOTE:** actually, you still need to launch zookeeper from all the machines.
 
 ### Step 5: launching the alert system
 
 ```bash
-# Launch Zookeeper from the login machine only
+# Launch Zookeeper from all the machines
+ssh <machine>
 cd $HOME/libs/zookeeper-3.4.10
 nohup ./bin/zkServer.sh start kafka_2.11-2.1.0/config/zookeeper.properties &
 ```
@@ -227,9 +229,11 @@ python bin/sendAlertStream.py \
 ztf-stream
 ```
 
+On the slaves, you probably need to be `sudo`.
+
 ## Broker: Apache Spark Cluster
 
-Description to come
+See [astrolabsoftware/fink-broker](https://github.com/astrolabsoftware/fink-broker).
 
 ## Benchmarks
 
